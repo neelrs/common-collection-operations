@@ -19,11 +19,9 @@ public class UnionTest {
         final Collection<RandomPOJO> aList = CollectionCreator.getCollection(ArrayList::new, field);
         final Collection<RandomPOJO> bList = CollectionCreator.getCollection(HashSet::new, field);
 
-        final Collection<RandomPOJO> union = Operations.union(aList, bList)
-                .collectionContainer(ArrayList::new)
-                .get();
+        final List<RandomPOJO> union = Operations.union(aList, bList)
+                .get(Collector.inList());
 
-        Assert.assertTrue(union instanceof List);
         Assert.assertEquals(1, union.size());
     }
 
@@ -33,11 +31,9 @@ public class UnionTest {
         final Collection<RandomPOJO> aList = CollectionCreator.getCollection(ArrayList::new, field);
         final Collection<RandomPOJO> bList = CollectionCreator.getCollection(ArrayList::new, field);
 
-        final Collection<RandomPOJO> union = Operations.union(aList, bList)
-                .collectionContainer(HashSet::new)
-                .get();
+        final Set<RandomPOJO> union = Operations.union(aList, bList)
+                .get(Collector.inSet());
 
-        Assert.assertTrue(union instanceof Set);
         Assert.assertEquals(1, union.size());
     }
 
@@ -48,19 +44,18 @@ public class UnionTest {
         final Collection<RandomPOJO> bList = CollectionCreator.getCollection(ArrayList::new, field);
 
         Operations.union(aList, bList)
-                .collectionContainer(HashSet::new)
                 .withDuplicates()
-                .get();
+                .get(HashSet::new);
 
     }
 
     @Test
-    public void shouldPerformUnionOfTwoListsWithDuplicates() throws Exception {
+    public void shouldPerformUnionOfTwoListsWithDuplicatesInList() throws Exception {
         final Object field = new Object();
         final Collection<RandomPOJO> aList = CollectionCreator.getCollection(ArrayList::new, field);
         final Collection<RandomPOJO> bList = CollectionCreator.getCollection(ArrayList::new, field);
 
-        final Collection<RandomPOJO> union = Operations.union(aList, bList).withDuplicates().get();
+        final Collection<RandomPOJO> union = Operations.union(aList, bList).withDuplicates().get(Collector.inList());
 
         Assert.assertEquals(2, union.size());
         final RandomPOJO randomPOJO = new RandomPOJO();
@@ -71,7 +66,7 @@ public class UnionTest {
     }
 
     @Test
-    public void shouldPerformUnionOfTwoListsWithoutDuplicates() throws Exception {
+    public void shouldPerformUnionOfTwoListsWithoutDuplicatesAndReturnListByDefault() throws Exception {
         final Object field = new Object();
         final Collection<RandomPOJO> aList = CollectionCreator.getCollection(ArrayList::new, field);
         final Collection<RandomPOJO> bList = CollectionCreator.getCollection(ArrayList::new, field);
@@ -87,9 +82,9 @@ public class UnionTest {
         final Collection<RandomPOJO> aList = CollectionCreator.getCollection(HashSet::new, field);
         final Collection<RandomPOJO> bList = CollectionCreator.getCollection(HashSet::new, field);
 
-        final Collection<RandomPOJO> union = Operations.union(aList, bList).withDuplicates().get();
+        final List<RandomPOJO> union = Operations.union(aList, bList).withDuplicates().get();
 
-        Assert.assertTrue(union instanceof List);
+        Assert.assertTrue(union != null);
         Assert.assertEquals(2, union.size());
     }
 

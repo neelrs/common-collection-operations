@@ -15,4 +15,8 @@ public final class Operations {
     public static <T> SubsetOperation<T> isSubset(final Collection<T> aList) {
         return new SubsetOperation<>(aList);
     }
+
+    public static <T> SubtractOperation<T> subtract(final Collection<T> aList, final Collection<T> bList) {
+        return new SubtractOperation<>(aList, bList);
+    }
 }

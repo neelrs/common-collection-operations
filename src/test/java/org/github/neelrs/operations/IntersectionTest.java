@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -19,10 +18,9 @@ public class IntersectionTest {
         final Collection<RandomPOJO> aList = CollectionCreator.getCollection(ArrayList::new, field);
         final Collection<RandomPOJO> bList = CollectionCreator.getCollection(ArrayList::new, field);
 
-        Collection<RandomPOJO> intersection = Operations.intersection(aList, bList).get();
+        final List<RandomPOJO> intersection = Operations.intersection(aList, bList).get(Collector.inList());
 
         Assert.assertEquals(1, intersection.size());
-        Assert.assertTrue(intersection instanceof List);
         Assert.assertEquals(aList, intersection);
         Assert.assertEquals(bList, intersection);
     }
@@ -32,7 +30,7 @@ public class IntersectionTest {
         final Collection<RandomPOJO> aList = CollectionCreator.getCollection(ArrayList::new, new Object());
         final Collection<RandomPOJO> bList = CollectionCreator.getCollection(ArrayList::new, new Object());
 
-        Collection<RandomPOJO> intersection = Operations.intersection(aList, bList).get();
+        final List<RandomPOJO> intersection = Operations.intersection(aList, bList).get(Collector.inList());
 
         Assert.assertTrue(intersection.isEmpty());
     }
@@ -43,7 +41,7 @@ public class IntersectionTest {
         final Collection<RandomPOJO> aList = CollectionCreator.getCollection(ArrayList::new, field, field);
         final Collection<RandomPOJO> bList = CollectionCreator.getCollection(ArrayList::new, field, new Object());
 
-        Collection<RandomPOJO> intersection = Operations.intersection(aList, bList).get();
+        Collection<RandomPOJO> intersection = Operations.intersection(aList, bList).get(Collector.inList());
 
         Assert.assertEquals(1, intersection.size());
         final RandomPOJO randomPOJO = new RandomPOJO();
@@ -57,10 +55,20 @@ public class IntersectionTest {
         final Collection<RandomPOJO> aList = CollectionCreator.getCollection(ArrayList::new, field, field);
         final Collection<RandomPOJO> bList = CollectionCreator.getCollection(ArrayList::new, field, new Object());
 
-        Collection<RandomPOJO> intersection = Operations.intersection(aList, bList)
-                .collectionContainer(HashSet::new)
-                .get();
+        final Set<RandomPOJO> intersection = Operations.intersection(aList, bList)
+                .get(Collector.inSet());
 
-        Assert.assertTrue(intersection instanceof Set);
+        Assert.assertTrue(intersection != null);
+    }
+
+    @Test
+    public void shouldReturnListOfIntersectionByDefault() throws Exception {
+        final Object field = new Object();
+        final Collection<RandomPOJO> aList = CollectionCreator.getCollection(ArrayList::new, field, field);
+        final Collection<RandomPOJO> bList = CollectionCreator.getCollection(ArrayList::new, field, new Object());
+
+        final List<RandomPOJO> intersection = Operations.intersection(aList, bList).get();
+
+        Assert.assertTrue(intersection != null);
     }
 }

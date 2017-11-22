@@ -2,18 +2,18 @@ package org.github.neelrs.operations;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
 
-class UnionOperation<T> extends GenericOperation {
+public class UnionOperation<T> extends GenericOperation {
 
     private final Collection<T> aList;
     private final Collection<T> bList;
     private boolean withDuplicates;
-    private Collection<T> resultContainer = new ArrayList<>();
 
     UnionOperation(final Collection<T> aList, final Collection<T> bList) {
         this.aList = aList;
@@ -25,14 +25,19 @@ class UnionOperation<T> extends GenericOperation {
         return this;
     }
 
-    public UnionOperation<T> collectionContainer(final Supplier<Collection<T>> container) {
-        this.resultContainer = container.get();
-        return this;
+    public <U extends Collection<T>> U get(final Supplier<U> container) {
+        final U resultList = container.get();
+        return findUnion(resultList);
     }
 
-    public Collection<T> get() {
+    public List<T> get() {
+        final List<T> resultList = new ArrayList<>();
+        return findUnion(resultList);
+    }
+
+    private <U extends Collection<T>> U findUnion(final U resultList) {
         final Map<T, AtomicInteger> objectMap = new ConcurrentHashMap<>();
-        validate();
+        validate(resultList);
         if (this.withDuplicates) {
             addToMapWithDuplicates(aList, objectMap);
             addToMapWithDuplicates(bList, objectMap);
@@ -40,7 +45,6 @@ class UnionOperation<T> extends GenericOperation {
             addToMapWithoutDuplicates(aList, objectMap);
             addToMapWithoutDuplicates(bList, objectMap);
         }
-        final Collection<T> resultList = resultContainer;
         for (final Map.Entry<T, AtomicInteger> entry : objectMap.entrySet()) {
             final int count = entry.getValue().get();
             for (int i = 0; i < count; i++) {
@@ -50,9 +54,9 @@ class UnionOperation<T> extends GenericOperation {
         return resultList;
     }
 
-    private void validate() {
-        if (withDuplicates && resultContainer instanceof Set) {
-            throw new IllegalArgumentException(resultContainer.getClass() + " cannot contain duplicates. " +
+    private void validate(final Collection<T> resultList) {
+        if (withDuplicates && resultList instanceof Set) {
+            throw new IllegalArgumentException(resultList.getClass() + " cannot contain duplicates. " +
                     "You might want to remove duplicates of use List");
         }
     }
