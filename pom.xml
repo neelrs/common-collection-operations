@@ -10,7 +10,7 @@
     <groupId>com.github.neelrs</groupId>
 
     <artifactId>common-collections-operations</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <description>
         This project covers all the mathematical common set operations on two Collections of Java objects.
         Current version covers union, intersection, subset and difference.
