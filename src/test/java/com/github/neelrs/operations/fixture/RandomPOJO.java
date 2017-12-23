@@ -1,4 +1,4 @@
-package org.github.neelrs.operations.fixture;
+package com.github.neelrs.operations.fixture;
 
 public class RandomPOJO {
     private Object field;

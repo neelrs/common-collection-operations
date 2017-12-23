@@ -1,9 +1,10 @@
-package org.github.neelrs.operations.test;
+package com.github.neelrs.operations.test;
 
-import org.github.neelrs.operations.Collector;
-import org.github.neelrs.operations.Operations;
-import org.github.neelrs.operations.fixture.CollectionCreator;
-import org.github.neelrs.operations.fixture.RandomPOJO;
+import com.github.neelrs.operations.Collector;
+import com.github.neelrs.operations.Operations;
+import com.github.neelrs.operations.fixture.CollectionCreator;
+import com.github.neelrs.operations.fixture.RandomPOJO;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
+@Ignore
 public class RandomTest {
 
     @Test

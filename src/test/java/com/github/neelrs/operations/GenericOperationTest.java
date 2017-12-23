@@ -1,7 +1,7 @@
-package org.github.neelrs.operations;
+package com.github.neelrs.operations;
 
-import org.github.neelrs.operations.fixture.CollectionCreator;
-import org.github.neelrs.operations.fixture.RandomPOJO;
+import com.github.neelrs.operations.fixture.CollectionCreator;
+import com.github.neelrs.operations.fixture.RandomPOJO;
 import org.junit.Assert;
 import org.junit.Test;
 

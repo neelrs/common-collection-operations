@@ -1,10 +1,10 @@
-package org.github.neelrs.operations;
+package com.github.neelrs.operations;
 
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class GenericOperation {
+class GenericOperation {
 
     static <T> void addToMapWithDuplicates(final Collection<T> list, final Map<T, AtomicInteger> objectMap) {
         for (final T o : list) {

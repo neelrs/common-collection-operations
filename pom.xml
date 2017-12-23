@@ -8,9 +8,9 @@
     </parent>
 
     <groupId>com.github.neelrs</groupId>
-
-    <artifactId>common-collections-operations</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <artifactId>common-collection-operations</artifactId>
+    <version>1.0.3-SNAPSHOT</version>
+    <name>${project.artifactId}</name>
     <description>
         This project covers all the mathematical common set operations on two Collections of Java objects.
         Current version covers union, intersection, subset and difference.
@@ -31,7 +31,7 @@
     </licenses>
 
     <scm>
-        <connection>scm:git:https://github.com/neelrs/common-collection-operations.git</connection>
+        <connection>scm:git:git://github.com/neelrs/common-collection-operations.git</connection>
         <developerConnection>scm:git:git@github.com:neelrs/common-collection-operations.git</developerConnection>
         <url>https://github.com/neelrs/common-collection-operations</url>
     </scm>
@@ -213,15 +213,4 @@
             </build>
         </profile>
     </profiles>
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
 </project>

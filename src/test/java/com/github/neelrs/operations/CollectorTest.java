@@ -1,4 +1,4 @@
-package org.github.neelrs.operations;
+package com.github.neelrs.operations;
 
 import org.junit.Assert;
 import org.junit.Test;

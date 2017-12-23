@@ -1,4 +1,4 @@
-package org.github.neelrs.operations;
+package com.github.neelrs.operations;
 
 import java.util.ArrayList;
 import java.util.HashSet;

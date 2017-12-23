@@ -1,4 +1,4 @@
-package org.github.neelrs.operations.fixture;
+package com.github.neelrs.operations.fixture;
 
 import java.util.Arrays;
 import java.util.Collection;
